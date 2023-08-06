@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/RAHAMSHAIK007/dockerprojectms.git'
+                git branch: 'main', url: 'https://github.com/laxmangowthami/dockerprojectms.git'
             }
         }
         stage('build') {
@@ -19,8 +19,13 @@ pipeline {
         }
         stage('push') {
             steps {
-                sh 'docker login -u  -p '
+                sh 'docker login -u pandagalaxman -p pandagalaxman'
                 sh 'docker push $repos:latest'
+            }
+        }
+        stage('stack') {
+            steps {
+                sh 'docker stack deploy --compose-file docker-compose.yml PAYTMMS'
             }
         }
     }
